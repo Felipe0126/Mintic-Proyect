@@ -20,7 +20,7 @@ public class ClienteModel {
         this.precio = precio;
         this.hospedaje = hospedaje;
         this.direccion = direccion;
-        Contacto = contacto;
+        this.Contacto = contacto;
     }
 
     public String getId() {
