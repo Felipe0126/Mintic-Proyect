@@ -9,7 +9,7 @@ public class ClienteModel {
     private Long precio;
     private String hospedaje;
     private String direccion;
-    private String Contacto;
+    private String contacto;
     
     public ClienteModel() {
     }
@@ -20,7 +20,7 @@ public class ClienteModel {
         this.precio = precio;
         this.hospedaje = hospedaje;
         this.direccion = direccion;
-        this.Contacto = contacto;
+        this.contacto = contacto;
     }
 
     public String getId() {
@@ -64,10 +64,10 @@ public class ClienteModel {
     }
 
     public String getContacto() {
-        return Contacto;
+        return contacto;
     }
 
     public void setContacto(String contacto) {
-        Contacto = contacto;
+        this.contacto = contacto;
     }
 }
