@@ -8,18 +8,16 @@ public class ClienteModel {
     private String destino;
     private Long precio;
     private String hospedaje;
-    private String direccion;
     private String contacto;
     
     public ClienteModel() {
     }
 
-    public ClienteModel(String id, String destino, Long precio, String hospedaje, String direccion, String contacto) {
+    public ClienteModel(String id, String destino, Long precio, String hospedaje, String contacto) {
         this.id = id;
         this.destino = destino;
         this.precio = precio;
         this.hospedaje = hospedaje;
-        this.direccion = direccion;
         this.contacto = contacto;
     }
 
@@ -53,14 +51,6 @@ public class ClienteModel {
 
     public void setHospedaje(String hospedaje) {
         this.hospedaje = hospedaje;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
     }
 
     public String getContacto() {

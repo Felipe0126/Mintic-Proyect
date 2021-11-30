@@ -27,6 +27,7 @@ public class ClienteService {
     //Guardar datos 
     public ClienteModel guardarDatos(ClienteModel cliente) {
         cliente.setDestino(cliente.getDestino().toLowerCase());
+        cliente.setHospedaje(cliente.getHospedaje().toLowerCase());
         return clienteRepository.save(cliente);
     }
 
@@ -54,22 +55,11 @@ public class ClienteService {
 
     //Obtener datos por precio
     public ArrayList<ClienteModel> obtenerDatosPorPrecio(Long precio) {
-        return clienteRepository.findByPrecio(precio);
+        return clienteRepository.findByPrecioLessThanEqual(precio);
     }
 
     //Obtener datos por hospedaje
     public ArrayList<ClienteModel> obtenerDatosPorHospedaje(String hospedaje) {
-        return clienteRepository.findByHospedaje(hospedaje.toLowerCase());
+        return clienteRepository.findByHospedaje(hospedaje);
     }
-
-    // Obtener datos por direccion
-    public ArrayList<ClienteModel> obtenerDatosPorDireccion(String direccion) {
-        return clienteRepository.findByDireccion(direccion.toLowerCase());
-    }
-
-    //Obtener datos por Contacto
-    public ArrayList<ClienteModel> obtenerDatosPorContacto(String contacto) {
-        return clienteRepository.findByContacto(contacto.toLowerCase());
-    }
-
 }

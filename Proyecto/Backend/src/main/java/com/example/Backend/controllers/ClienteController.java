@@ -1,22 +1,9 @@
 package com.example.Backend.controllers;
-
-import java.util.ArrayList;
-import java.util.Optional;
-
+import java.util.*;
 import com.example.Backend.models.ClienteModel;
 import com.example.Backend.services.ClienteService;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -62,13 +49,8 @@ public class ClienteController {
         return clienteService.obtenerDatosPorPrecio(precio);
     }
 
-    @GetMapping(path = "/direccion/{direccion}")
-    public ArrayList<ClienteModel> clientePorDireccion(@PathVariable("direccion") String direccion){
-        return clienteService.obtenerDatosPorDireccion(direccion);
-    }
-
-    @GetMapping(path = "/contacto/{contacto}")
-    public ArrayList<ClienteModel> clientePorContacto(@PathVariable("contacto") String contacto){
-        return clienteService.obtenerDatosPorContacto(contacto);
+    @GetMapping(path = "/hospedaje/{hospedaje}")
+    public ArrayList<ClienteModel> clientePorHospedaje(@PathVariable("hospedaje") String hospedaje){
+        return clienteService.obtenerDatosPorHospedaje(hospedaje);
     }
 }
