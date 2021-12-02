@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST})
-@RequestMapping("/cliente")
+@RequestMapping("/viajes")
 public class ClienteController {
     @Autowired
     ClienteService clienteService;
