@@ -1,10 +1,10 @@
 import React from "react";
-import NavBarUsuario from "../components/NavBarUsuario";
+import NavBar from "../components/NavBar";
 
 const Usuario = () => {
     return(
         <div>
-            <NavBarUsuario/>
+            <NavBar/>
             
             <div className="modal-dialog text-center">
                 <div className="col-sm-8 main-section">

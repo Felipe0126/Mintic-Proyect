@@ -1,70 +1,76 @@
-import React from 'react';
-import NavBarRegistro from '../components/NavBarRegistro';
+import NavBar from "../components/NavBar";
+import axios from 'axios'
+import React, { useState } from 'react'
+import { Container, Form } from 'react-bootstrap'
+import { useHistory } from 'react-router'
+import Swal from 'sweetalert2'
 
 const Registro = () => {
+
+    const history = useHistory();
+
+    const [data, setData] = useState({destino:"",precio:"",hospedaje:"",contacto:""})
+
+    const handleChange =  ({target}) => {
+        setData({
+            ...data,
+            [target.name]:target.value
+        })
+    }
+
+    const URL="http://localhost:8080/viajes";
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+        const response = await axios.post(URL,data);
+
+        if(response.status===200){
+            Swal.fire(
+                "Guardado!",
+                `El viaje con id: ${response.data.id} ha sido guardado correctamete!`,
+                "success"
+            )
+            history.push("/reservas")
+        }else{
+            console.log(response.status,response)
+            Swal.fire(
+                "Error",
+                "Problemas al crear el viaje",
+                "error"
+            )
+        }
+    }
+
     return (
         <div>
-            <NavBarRegistro/>
-
-            <div className="container">
-                <div className="row">
-                    <div className="col-12" formsesion>
-                        <form action="">
-                            <div className="form-floating mb-3">
-                                <input className="form-control" type="number" name="id" />
-                                <label for="pnombre">Numero de Identificacion:</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input className="form-control" type="text" name="nombres" />
-                                <label for="snombre">Nombres:</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input className="form-control" type="text" name="apellidos" />
-                                <label for="papellido">Apellidos:</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input className="form-control" type="text" name="email" />
-                                <label for="sapellido">Email:</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input className="form-control" type="text" name="direccion" />
-                                <label for="tacademico">Dirección:</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input className="form-control" type="number" name="telefono" />
-                                <label for="telefono">Teléfono:</label>
-                            </div>
-                            <select className="form-select" id="lugar" name="lugar">
-                                    <option value="Elegir" selected="Elegir">Elegir Destino: </option>
-                                    <option value="San Andres">San Andres</option>
-                                    <option value="Amazonas">Amazonas</option>
-                                    <option value="Cartagena y Santa Marta">Barranquilla</option>
-                                    <option value="Cartagena y Santa Marta">Medellin</option>
-                                    <option value="Cartagena y Santa Marta">Cartagena</option>
-                                    <option value="Parque del cafe">Santa Marta</option>
-                                    <option value="Parque del cafe">Parque del Café</option>
+            <Container>
+                <NavBar/>
+                <h1 className="text-center p-2">Nuevo Viaje</h1>
+                <Container className="col-md-5 mx-auto">
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3">
+                            <select className="form-select" id="destino" name="destino" required value={data.destino} onChange={handleChange}>
+                                        <option selected="Elegir">Elegir Destino: </option>
+                                        <option value="San Andres">San Andres</option>
+                                        <option value="Amazonas">Amazonas</option>
+                                        <option value="Barranquilla">Barranquilla</option>
+                                        <option value="Medellin">Medellin</option>
+                                        <option value="Cartagena">Cartagena</option>
+                                        <option value="Santa Marta">Santa Marta</option>
                             </select>
-                            <br />
-                            <div className="form-floating mb-3">
-                                <input className="form-control" type="date" name="fecha de salida" />
-                                <label for="fecha de salida">Fecha de Salida:</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input className="form-control" type="date" name="fecha de llegada" />
-                                <label for="fecha de llegada">Fecha de Llegada:</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input className="form-control" type="number" name="numero de personas" />
-                                <label for="numero de personas">Numero de Personas:</label>
-                            </div>
-                            <br />
-                            <button type="submit" className="btn btn-primary">Hacer mi Reserva </button>
-                            
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+                        </Form.Group >
+                        <Form.Group className="mb-3">
+                            <Form.Control type="number" name="precio" placeholder="Precio" required value={data.precio} onChange={handleChange}/>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Control type="text" name="hospedaje" placeholder="Hospedaje" required value={data.hospedaje}  onChange={handleChange}/>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Control type="text" name="contacto" placeholder="Contacto" required value={data.contacto} onChange={handleChange}/>
+                        </Form.Group>
+                        <button className="btn btn-success">Guardar</button>
+                    </Form>
+                </Container>
+            </Container>
         </div>
     )
 }
